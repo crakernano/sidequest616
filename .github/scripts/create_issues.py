@@ -37,9 +37,20 @@ def main():
     repo = os.environ.get("GITHUB_REPOSITORY") or os.environ.get("REPO")
     # Accept either the automatic GITHUB_TOKEN or a custom CI token (e.g. secrets.CI_TOKEN)
     token = os.environ.get("GITHUB_TOKEN") or os.environ.get("CI_TOKEN") or os.environ.get("TOKEN")
-    if not repo or not token:
-        print("GITHUB_REPOSITORY and GITHUB_TOKEN must be set in the environment.")
+    missing = []
+    if not repo:
+        missing.append('GITHUB_REPOSITORY')
+    if not token:
+        missing.append('CI_TOKEN or GITHUB_TOKEN or TOKEN')
+    if missing:
+        print("Missing required environment variables:", ", ".join(missing))
+        # print some diagnostics for troubleshooting (do not print secrets)
+        print("Available environment keys:", ", ".join(sorted([k for k in os.environ.keys()])))
         sys.exit(1)
+
+    # identify which token env var is being used (for logs)
+    token_source = 'GITHUB_TOKEN' if os.environ.get('GITHUB_TOKEN') else ('CI_TOKEN' if os.environ.get('CI_TOKEN') else ('TOKEN' if os.environ.get('TOKEN') else ''))
+    print(f"Using token from: {token_source}")
 
     headers = {
         "Authorization": f"token {token}",
