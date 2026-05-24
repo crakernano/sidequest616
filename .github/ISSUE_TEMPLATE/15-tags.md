@@ -1,5 +1,5 @@
 ---
-name: Backend: Tags
+name: "Backend: Tags"
 about: Implement tags management and association to plans
 title: "[backend] Tags: add/remove/list"
 labels: backend, plans

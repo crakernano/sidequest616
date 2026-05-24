@@ -1,5 +1,5 @@
 ---
-name: Backend: Sharing - collaborators
+name: "Backend: Sharing - collaborators"
 about: Implement sharing/collaboration for plans
 title: "[backend] Sharing: invite/remove collaborator"
 labels: backend, plans, collaboration

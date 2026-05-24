@@ -1,5 +1,5 @@
 ---
-name: Backend: Admin - users
+name: "Backend: Admin - users"
 about: Admin endpoints to manage users
 title: "[backend] Admin: list/delete users"
 labels: backend, admin

@@ -1,5 +1,5 @@
 ---
-name: Backend: API docs & OpenAPI
+name: "Backend: API docs & OpenAPI"
 about: Ensure API docs are accurate and OpenAPI is validated
 title: "[backend] API docs & OpenAPI checks"
 labels: backend, docs

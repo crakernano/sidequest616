@@ -1,5 +1,5 @@
 ---
-name: Backend: Users - update profile
+name: "Backend: Users - update profile"
 about: Implement endpoint to update the authenticated user's profile
 title: "[backend] Users: update profile"
 labels: backend, users

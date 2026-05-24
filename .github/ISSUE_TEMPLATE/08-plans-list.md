@@ -1,5 +1,5 @@
 ---
-name: Backend: Plans - list
+name: "Backend: Plans - list"
 about: Implement endpoint to list plans with pagination and filters
 title: "[backend] Plans: list plans (filters)"
 labels: backend, plans

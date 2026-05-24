@@ -1,5 +1,5 @@
 ---
-name: Backend: Plan items - CRUD
+name: "Backend: Plan items - CRUD"
 about: Implement CRUD for items inside a plan (activities, places)
 title: "[backend] Plan items: add/update/delete"
 labels: backend, plans

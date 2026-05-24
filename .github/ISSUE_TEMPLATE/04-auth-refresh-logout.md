@@ -1,5 +1,5 @@
 ---
-name: Backend: Auth - refresh/logout
+name: "Backend: Auth - refresh/logout"
 about: Implement token refresh and logout endpoints
 title: "[backend] Auth: refresh token/logout"
 labels: backend, auth

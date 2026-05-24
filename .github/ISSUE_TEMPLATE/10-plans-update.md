@@ -1,5 +1,5 @@
 ---
-name: Backend: Plans - update
+name: "Backend: Plans - update"
 about: Implement endpoint to update a plan
 title: "[backend] Plans: update plan"
 labels: backend, plans

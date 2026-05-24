@@ -1,5 +1,5 @@
 ---
-name: Backend: Health check
+name: "Backend: Health check"
 about: Implement health check endpoint for the backend
 title: "[backend] Health check endpoint"
 labels: backend, api, enhancement

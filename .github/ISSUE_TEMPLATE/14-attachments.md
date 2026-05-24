@@ -1,5 +1,5 @@
 ---
-name: Backend: Attachments
+name: "Backend: Attachments"
 about: Implement attachments upload and deletion
 title: "[backend] Attachments: upload/delete"
 labels: backend, files
