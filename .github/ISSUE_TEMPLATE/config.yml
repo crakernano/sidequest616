@@ -1,0 +1,7 @@
+blank_issues_enabled: false
+
+# Optionally add a contact link for contributors to ask questions
+contact_links:
+  - name: "Repository owner"
+    url: "https://github.com/"
+    about: "If you have questions about these templates, create an issue or contact the owner."
