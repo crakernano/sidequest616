@@ -35,7 +35,8 @@ def issue_exists(repo, headers, title):
 
 def main():
     repo = os.environ.get("GITHUB_REPOSITORY") or os.environ.get("REPO")
-    token = os.environ.get("GITHUB_TOKEN")
+    # Accept either the automatic GITHUB_TOKEN or a custom CI token (e.g. secrets.CI_TOKEN)
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("CI_TOKEN") or os.environ.get("TOKEN")
     if not repo or not token:
         print("GITHUB_REPOSITORY and GITHUB_TOKEN must be set in the environment.")
         sys.exit(1)
