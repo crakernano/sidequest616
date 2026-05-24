@@ -72,6 +72,22 @@ alembic revision --autogenerate -m "create plans table"
 alembic upgrade head
 ```
 
+Migraciones automáticas al iniciar (opcional)
+-------------------------------------------
+El contenedor del backend ahora puede aplicar migraciones automáticamente al arrancar si estableces la variable de entorno `APPLY_MIGRATIONS=true` en el servicio.
+
+Ejemplo en `docker-compose.yml` (override):
+
+```yaml
+services:
+	backend:
+		environment:
+			- APPLY_MIGRATIONS=true
+```
+
+El `entrypoint` del contenedor ejecutará `alembic upgrade head` y reintentará hasta que la base de datos esté lista.
+
+
 Notas importantes
 -----------------
 - Asegúrate de que `siderequest_backend/.env` contiene las variables `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` y `DATABASE_URL` coherentes con `docker-compose.yml`.
@@ -137,4 +153,26 @@ Siguientes pasos recomendados
 - Añadir tests y una configuración de CI que ejecute linters y tests.
 - Añadir un `Makefile` o scripts para comandos comunes (`up`, `down`, `migrate`, `shell`).
 - Implementar un flujo seguro para gestionar secretos en staging/producción.
+
+Pre-commit y linters (desarrollo)
+--------------------------------
+Recomendado: usar `pre-commit` para ejecutar `ruff`, `pylint`, `bandit` y `vulture` antes de cada commit sobre la carpeta `siderequest_backend`.
+
+Instalación rápida:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+pre-commit install
+```
+
+Probando los hooks manualmente:
+
+```bash
+pre-commit run --all-files
+```
+
+Los hooks están configurados para ejecutar sobre archivos dentro de la carpeta `siderequest_backend`. Ajusta `.pre-commit-config.yaml` si tu código está en un path distinto.
+
 

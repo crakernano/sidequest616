@@ -1,0 +1,7 @@
+repos:
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: main
+    hooks:
+      - id: ruff
+        name: ruff (format & lint)
+        files: ^sidequest_backend/.*\.py$

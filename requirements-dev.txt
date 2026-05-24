@@ -1,0 +1,5 @@
+pre-commit
+ruff
+pylint
+bandit
+vulture

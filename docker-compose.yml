@@ -8,9 +8,9 @@ services:
       - ./sidequest_backend/.env
     environment:
       # These should be defined in ./siderequest_backend/.env
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: plans_db
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
@@ -20,6 +20,8 @@ services:
     build:
       context: ./sidequest_backend
       dockerfile: Dockerfile
+    environment:
+      APPLY_MIGRATIONS: true
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     env_file:
       - ./sidequest_backend/.env
