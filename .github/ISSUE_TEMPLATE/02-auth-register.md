@@ -1,5 +1,5 @@
 ---
-name: Backend: Auth - register
+name: "Backend: Auth - register"
 about: Implement user registration (signup) endpoint
 title: "[backend] Auth: register"
 labels: backend, auth, enhancement

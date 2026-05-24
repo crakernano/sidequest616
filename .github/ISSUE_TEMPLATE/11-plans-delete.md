@@ -1,5 +1,5 @@
 ---
-name: Backend: Plans - delete
+name: "Backend: Plans - delete"
 about: Implement endpoint to delete a plan
 title: "[backend] Plans: delete plan"
 labels: backend, plans, destructive

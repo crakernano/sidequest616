@@ -1,5 +1,5 @@
 ---
-name: Backend: Plans - retrieve
+name: "Backend: Plans - retrieve"
 about: Implement endpoint to retrieve a plan details
 title: "[backend] Plans: retrieve plan"
 labels: backend, plans

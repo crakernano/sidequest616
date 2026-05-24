@@ -1,5 +1,5 @@
 ---
-name: Backend: Search & Export
+name: "Backend: Search & Export"
 about: Implement search and export functionality
 title: "[backend] Search & export (JSON/ICS)"
 labels: backend, features

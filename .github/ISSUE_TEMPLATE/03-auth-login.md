@@ -1,5 +1,5 @@
 ---
-name: Backend: Auth - login
+name: "Backend: Auth - login"
 about: Implement user login and token issuance
 title: "[backend] Auth: login (token)"
 labels: backend, auth, enhancement

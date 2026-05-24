@@ -1,5 +1,5 @@
 ---
-name: Backend: Plans - create
+name: "Backend: Plans - create"
 about: Implement endpoint to create a plan
 title: "[backend] Plans: create plan"
 labels: backend, plans

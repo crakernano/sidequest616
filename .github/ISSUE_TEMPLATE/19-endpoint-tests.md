@@ -1,5 +1,5 @@
 ---
-name: Backend: Endpoint tests
+name: "Backend: Endpoint tests"
 about: Add endpoint tests using pytest
 title: "[backend] Endpoint tests (pytest)"
 labels: backend, tests

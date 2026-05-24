@@ -1,5 +1,5 @@
 ---
-name: Backend: Users - get profile
+name: "Backend: Users - get profile"
 about: Implement endpoint to retrieve current user profile
 title: "[backend] Users: get profile"
 labels: backend, users
