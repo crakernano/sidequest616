@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel,ConfigDict
 from datetime import datetime
 
 
@@ -11,7 +11,10 @@ class PlanBase(BaseModel):
 
 
 class PlanCreate(PlanBase):
-    pass
+    title: str
+    description: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
 
 
 class PlanUpdate(BaseModel):
@@ -26,7 +29,8 @@ class PlanInDBBase(PlanBase):
     created_at: Optional[datetime]
 
     class Config:
-        orm_mode = True
+        #orm_mode = True
+        model_config = ConfigDict(from_attributes=True)
 
 
 class Plan(PlanInDBBase):
