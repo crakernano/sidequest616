@@ -5,11 +5,14 @@ from app import crud
 from app.db.session import get_db
 from app.schemas.plan import Plan, PlanCreate, PlanUpdate
 from app.crud.plan import create_plan, get_plan, get_plans, update_plan, delete_plan
+
+from app.core.security import get_current_user
+
 router = APIRouter()
 
 
 @router.post("/", response_model=Plan, status_code=201)
-def create_new_plan(payload: PlanCreate, db: Session = Depends(get_db)):
+def create_new_plan(payload: PlanCreate, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     return create_plan(db, payload)
 
 

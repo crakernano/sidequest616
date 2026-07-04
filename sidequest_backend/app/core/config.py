@@ -7,6 +7,11 @@ try:
 except Exception:
     pydantic_version = (0, 0)
 
+class settings:
+    JWT_SECRET:str = os.getenv("SECRET_KEY","mysecretkey")
+    JWT_ALGORITHM: str = os.getenv("ALGORITHM","HS256")
+    ACCESS_TOKEN_EXPIRE_MINUTES:int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
+
 
 def _load_dotenv_if_present():
     # lazy import to avoid adding dependency if not needed
