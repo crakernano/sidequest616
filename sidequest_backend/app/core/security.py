@@ -1,4 +1,5 @@
 from os import getenv
+import logging
 from datetime import timedelta,datetime,timezone
 from typing import Optional, Literal
 from fastapi import Depends
@@ -38,31 +39,39 @@ def decode_token(token:str) -> dict:
     payload = jwt.decode(jwt=token, key=SECRET_KEY, algorithms=[ALGORITHM])
     return payload
     
-async def get_current_user(db: Session= Depends(get_db),  token:str = Depends(oauth2_scheme)):
+async def get_current_user(db: Session= Depends(get_db),  token:str = Depends(oauth2_scheme))->User:
     try:
         payload = decode_token(token)
-        sub: Optional[str] =payload.get("sub")
-        username : Optional[str] = payload.get("username")
-        if sub is None or username is None:
+        #logging.info("Decodificando token: %s", payload)
+        sub: Optional[str] = payload.get("sub")
+        if not sub:
+            logging.error("Token válido pero falta el campo 'sub' en el payload: %s", payload)
             raise raise_credentials_exc()
         
-        user_id =int(sub)
-        #return {"email":sub, "username":username}
+        user_id = int(sub)
+        #logging.debug("Usuario extraído del token: %s (token prefix: %s)", user_id, token[:10])
     
-    except ExpiredSignatureError:
+    except ExpiredSignatureError as exc:
+        logging.warning("Token expirado: prefix=%s, error=%s", token[:10], exc)
         raise raise_expired_token()
     
-    except InvalidTokenError:
+    except InvalidTokenError as exc:
+        logging.warning("Token inválido: prefix=%s, error=%s", token[:10], exc)
         raise raise_credentials_exc()
     
-    except  PyJWTError:
+    except PyJWTError as exc:
+        logging.error("Error JWT al decodificar token: prefix=%s, error=%s", token[:10], exc)
         raise raise_credentials_exc()
     
     user = db.get(User, user_id)
-
-    if not user or not user.is_active:
+    if not user:
+        logging.warning("Usuario no encontrado para user_id=%s, token prefix=%s", user_id, token[:10])
+        raise raise_credentials_exc()
+    if not user.is_active:
+        logging.warning("Usuario no activo user_id=%s, token prefix=%s", user_id, token[:10])
         raise raise_credentials_exc()
     
+    #logging.info("Usuario autenticado correctamente: user_id=%s", user_id)
     return user
 
 def hash_password(password:str)->str:
