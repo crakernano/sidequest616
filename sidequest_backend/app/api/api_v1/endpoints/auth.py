@@ -45,12 +45,16 @@ async def read_me(current_user: User =Depends(get_current_user)):
     return UserPublic.model_validate(current_user)
 
 @router.put("/role/{user_id}", response_model=UserPublic)
-def set_role(user_id: int, 
+def update_role(user_id: int, 
              db=Depends(get_db),
              payload: RoleUpdate = None,
              _admin: User = Depends(require_admin)):
-    user = get_user_by_id(db, user_id)
-    if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
-    updated_user = set_role(db, user, payload.role)
-    return UserPublic.model_validate(updated_user)
+    try:
+        user = get_user_by_id(db, user_id)
+        if not user:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
+        updated_user = set_role(db, user, payload.role)
+        return UserPublic.model_validate(updated_user)
+    except Exception as e:
+        logging.error(f"Error al actualizar el rol del usuario: {e}")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error al actualizar el rol del usuario")

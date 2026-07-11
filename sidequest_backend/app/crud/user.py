@@ -13,7 +13,7 @@ from app.models.user import User
 logging.config.fileConfig("/app/app/core/logging.conf")
 
 def get_user_by_id(db: Session, user_id:int)-> User|None:
-    return db.query(models.user.User).filter(models.user.User.id == user_id).first()
+    return db.query(User).filter(User.id == user_id).first()
 
 def get_user_by_email(db: Session, email:str)-> User|None:
     try:

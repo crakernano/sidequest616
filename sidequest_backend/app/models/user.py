@@ -19,5 +19,5 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow())
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow(), onupdate=datetime.utcnow)
 
-    def __repr__(self) -> str:
-        return f"<User(id={self.id}, username='{self.username}', email='{self.email}')>" 
+#    def __repr__(self) -> str:
+#        return f"<User(id={self.id}, username='{self.username}', email='{self.email}')>" 
