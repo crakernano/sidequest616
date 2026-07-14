@@ -3,7 +3,7 @@
 Listado consolidado de endpoints a desarrollar para el backend. Úsalos como checklist de funcionalidad.
 
 [] **Health check**  
-  [] GET /api/v1/health — Estado de la aplicación y comprobaciones básicas (DB, uptime). Público.  
+  [X] GET /api/v1/health — Estado de la aplicación y comprobaciones básicas (DB, uptime). Público.  
 
 [] Autenticación  
   [X] POST /api/v1/auth/register — Registro de usuario (nombre, email, contraseña).  

@@ -1,7 +1,7 @@
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel,ConfigDict
 from datetime import datetime
-
+from app.schemas.auth import UserPublic
 
 class PlanBase(BaseModel):
     title: str
@@ -35,3 +35,11 @@ class PlanInDBBase(PlanBase):
 
 class Plan(PlanInDBBase):
     pass
+
+class PlanResponse(PlanBase):
+    id: int
+    participants: List[UserPublic] = []
+
+class AddParticipantSchema(BaseModel):
+    user_id: int
+    plan_id: int
