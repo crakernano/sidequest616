@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from app.db.base import Base
-
+from app.models.plan_users import PlanUser
 
 class Plan(Base):
     __tablename__ = "plans"
@@ -17,7 +17,6 @@ class Plan(Base):
     location = Column(String(255), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     plan_tags = relationship("PlanTag", back_populates="plan", cascade="all, delete-orphan")
-
-
+    participants = relationship("User", secondary=PlanUser.__table__, back_populates="plans")
 # Importar PlanTag al final para evitar circular imports
 from app.models.plan_tags import PlanTag  # noqa: E402, F401

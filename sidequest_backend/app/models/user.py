@@ -1,8 +1,10 @@
 from typing import Literal
 from sqlalchemy import String, Boolean, DateTime, Enum
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
 from app.db.base import Base
+from app.models.plan_users import PlanUser
+
 
 Role = Literal["user", "moderator", "admin"]
 
@@ -21,3 +23,5 @@ class User(Base):
 
 #    def __repr__(self) -> str:
 #        return f"<User(id={self.id}, username='{self.username}', email='{self.email}')>" 
+# Relación con planes
+    plans = relationship("Plan", secondary=PlanUser.__table__, back_populates="participants")
