@@ -28,7 +28,7 @@ Listado consolidado de endpoints a desarrollar para el backend. Úsalos como che
   [] DELETE /api/v1/plans/{plan_id}/items/{item_id} — Eliminar item.  
 
 [] Colaboración / Compartir  
-  [] POST /api/v1/plans/{id}/collaborators — Invitar colaborador (email, rol).  
+  [x] POST /api/v1/plans/{id}/collaborators — Invitar colaborador (email, rol).  
   [] DELETE /api/v1/plans/{id}/collaborators/{user_id} — Remover colaborador.  
 
 [] Attachments  

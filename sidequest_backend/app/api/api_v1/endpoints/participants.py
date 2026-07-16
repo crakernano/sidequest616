@@ -1,5 +1,5 @@
 import logging
-from fastapi import FastAPI, Depends, HTTPException, status, APIRouter
+from fastapi import FastAPI, Depends, HTTPException, status, APIRouter, Request
 from sqlalchemy.orm import Session
 from app.schemas.plan import Plan
 from app.models.user import User
@@ -13,7 +13,7 @@ router = APIRouter()
 
 
 @router.get("/plans/{id}/participants", tags=["participants"])
-def get_participants(id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+def get_participants(request: Request,id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     try:
         return get_participants_by_plan(db, plan_id=id)
     except Exception as e:
@@ -22,7 +22,7 @@ def get_participants(id: int, db: Session = Depends(get_db), current_user=Depend
 
 #ToDo: Crear un BackgroundTasks para notificar que ha sido invitado
 @router.post("/plans/{plan_id}/participants", response_model=PlanResponse, status_code=status.HTTP_200_OK)
-def add_participant_to_plan(plan_id: int, payload: AddParticipantSchema, db: Session = Depends(get_db)):
+def add_participant_to_plan(request: Request, plan_id: int, payload: AddParticipantSchema, db: Session = Depends(get_db)):
     plan = db.query(Plan).filter(Plan.id == plan_id).first()
     if not plan:
         raise HTTPException(status_code=404, detail="Plan no encontrado")
@@ -40,11 +40,11 @@ def add_participant_to_plan(plan_id: int, payload: AddParticipantSchema, db: Ses
     return plan
 
 @router.delete("/plans/{plan_id}/participants/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
-def remove_participant_from_plan(plan_id: int, user_id: int, db: Session = Depends(get_db)):
+def remove_participant_from_plan(request: Request,plan_id: int, user_id: int, db: Session = Depends(get_db)):
     pass
 
 @router.get("/my-plans", status_code=status.HTTP_200_OK)
-def get_my_plans(db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+def get_my_plans(request: Request, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     #logging.info(f"Current user: {current_user.username}, ID: {current_user.id}")
     plans = []
 

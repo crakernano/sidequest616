@@ -5,6 +5,8 @@ import logging
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from slowapi.middleware import SlowAPIMiddleware
+
 def register_middlewares(app:FastAPI):
     @app.middleware("http")
     async def add_process_time_header(request: Request, call_next):
@@ -45,3 +47,4 @@ def register_middlewares(app:FastAPI):
         allow_methods=["*"],
         allow_headers=["*"]
         )
+    app.add_middleware(SlowAPIMiddleware)

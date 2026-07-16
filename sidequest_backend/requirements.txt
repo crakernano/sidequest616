@@ -13,3 +13,4 @@ pwdlib>=0.3.0
 passlib>=1.7
 pwdlib[argon2]
 pydantic[email]>=2.7,<3
+slowapi
