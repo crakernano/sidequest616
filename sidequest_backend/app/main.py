@@ -3,6 +3,11 @@ from prometheus_fastapi_instrumentator import Instrumentator
 
 import logging
 import logging.config
+
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+
 from app.db.session import engine
 from app.models import plan as models
 from app.api.api_v1.api import api_router
@@ -16,6 +21,12 @@ def create_app() -> FastAPI:
     return app
 
 app = create_app()
+
+#Rate Limit
+limiter = Limiter(key_func=get_remote_address, default_limits=["10/minute"])
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 
 models.Base.metadata.create_all(bind=engine)
 
