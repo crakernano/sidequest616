@@ -5,3 +5,4 @@ venv/
 .env
 /.vscode/
 alembic/versions/
+archivos_subidos/*
